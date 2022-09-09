@@ -1,58 +1,46 @@
 var Tree = function(value) {
   var newTree = {};
   newTree.value = value;
-
-
-  newTree.children = null;  // fix me
+  newTree.children = [];  // fix me
   _.extend(newTree, treeMethods);
+
   return newTree;
 };
-
-var treeNode = function(value) {
-  var node = {};
-
-  node.value = value;
-  node.children = null;
-  _.extend(node, treeMethods);
-
-  return node;
-};
-
-//tree = {value: x, children: [{value: x, children: [] }]}
-
 
 var treeMethods = {};
 
 treeMethods.addChild = function(value) {
 
-  console.log(this);
-  if (this.children === null) {
-    this.children = [];
-    this.children.push(new treeNode(value));
-  } else {
-    //addChild.call(this, value);
-  }
+  // console.log(this);
+  this.children.push(new Tree(value));
 
 };
 
 treeMethods.contains = function(target) {
   var lookForChild = function(node) {
-    if (node.children !== null) {
+    var result = [];
+    if (node.children.length !== 0) {
       if (target === node.value) {
         return true;
       } else {
         for (let i = 0; i < node.children.length; i++) {
-          return lookForChild(node.children[i]);
+          result.push(lookForChild(node.children[i]));
         }
+          if (result.includes(true)) {
+            return true;
+          } else {
+            return false;
+          }
       }
     } else {
-      if (target === node.value) {return true;
+      if (target === node.value) {
+        return true;
       } else {
-      return false;
+        return false;
       }
     }
   }
-  console.log(this);
+  // console.log(this);
   return lookForChild(this);
 };
 
@@ -61,3 +49,18 @@ treeMethods.contains = function(target) {
 /*
  * Complexity: What is the time complexity of the above functions?
  */
+
+
+// var treeNode = function(value) {
+//   var node = {};
+
+//   node.value = value;
+//   node.children = [];
+//   // node.addChild = function(value) {
+//   //   this.children.push(new treeNode(value));
+//   // };
+
+//   return node;
+// };
+
+//tree = {value: x, children: [{value: x, children: [] }]}
