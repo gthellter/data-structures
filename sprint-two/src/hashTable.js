@@ -22,7 +22,7 @@ HashTable.prototype.insert = function(k, v) {
     bucket[duplicateIndex][1] = v;
   } else {
 
-    console.log(bucket);
+    //console.log(bucket);
     bucket.push([k, v]);
     this._storage.set(index, bucket);
   }
@@ -43,7 +43,7 @@ HashTable.prototype.remove = function(k) {
   var bucket = this._storage.get(index);
   for (let i = 0; i < bucket.length; i++) {
     if (bucket[i][0] === k) {
-      bucket[i][1] = undefined;
+      bucket.splice(i, 1);
     }
   }
 };
