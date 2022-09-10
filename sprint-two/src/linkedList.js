@@ -9,11 +9,11 @@ var LinkedList = function() {
       list.head = node1;
       list.tail = node1;
     } else {
+      var previousNode = list.tail;
       list.tail.next = (new Node(value));
       list.tail = list.tail.next;
+      list.tail.previous = previousNode;
     }
-    // console.log(node1);
-    // console.log(list);
   };
 
   list.removeHead = function() {
@@ -48,6 +48,7 @@ var Node = function(value) {
 
   node.value = value;
   node.next = null;
+  node.previous = null;
 
   return node;
 };
