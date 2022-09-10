@@ -40,11 +40,12 @@ HashTable.prototype.retrieve = function(k) {
 
 HashTable.prototype.remove = function(k) {
   var index = getIndexBelowMaxForKey(k, this._limit);
-  this._storage.each(function (element) {
-    if (element === k) {
-      element = undefined;
+  var bucket = this._storage.get(index);
+  for (let i = 0; i < bucket.length; i++) {
+    if (bucket[i][0] === k) {
+      bucket[i][1] = undefined;
     }
-  })
+  }
 };
 
 
